@@ -12,7 +12,8 @@ frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Цвет фона
 -- Создание текста
 local textLabel = Instance.new("TextLabel", frame)
 textLabel.Size = UDim2.new(1, 0, 1, 0) -- Занимает весь фрейм
-textLabel.Text = "Вы используете старую версию скрипта. Новая версия уже скопирована в ваш буфер обмена"
+textLabel.Text = "Вы используете старую версию скрипта.
+Новая версия уже скопирована в ваш буфер обмена"
 textLabel.TextColor3 = Color3.fromRGB(0, 0, 0) -- Цвет текста
 textLabel.BackgroundTransparency = 1 -- Прозрачность фона текста
 
