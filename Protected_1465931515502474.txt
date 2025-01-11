@@ -1,4 +1,4 @@
-setclipboard("loadstring(game:HttpGet('https://raw.githubusercontent.com/Roman304010/NewBrookhavenScripts/refs/heads/main/Protected_5736407961643454.lua'))()")
+setclipboard("ДОСТУП ОГРАНИЧЕН")
 -- Создание GUI
 local player = game.Players.LocalPlayer
 local screenGui = Instance.new("ScreenGui", player.PlayerGui)
