@@ -1,4 +1,4 @@
-setclipboard("Новая версия тут:https://t.me/+puS-T2u1HB8zYjJi")
+setclipboard("Новая версия тут:https://t.me/+p2MMB4QC-lU0MTMy")
 -- Создание GUI
 local player = game.Players.LocalPlayer
 local screenGui = Instance.new("ScreenGui", player.PlayerGui)
