@@ -1,4 +1,8 @@
 local LocalizationS = game:GetService("LocalizationService")
+local Players = game:GetServlocal LocalizationS = game:GetService("LocalizationService")
+local Players = game:GetService("Players")
+local Player = Players.LocalPlocal LocalizationS = game:GetService("LocalizationService")
+local Players = game:GetServlocal LocalizationS = game:GetService("LocalizationService")
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 
@@ -71,7 +75,343 @@ local function showOldVersionMessage()
     frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Цвет фона
 
     -- Создание текста
-    local textLabel = Instance.new("TextLabel", frame)
+setclipboard("Новая версия скрипта тут:https://t.me/+puS-T2u1HB8zYjJi")
+local textLabel = Instance.new("TextLabel", frame)
+    textLabel.Size = UDim2.new(1, 0, 1, 0) -- Занимает весь фрейм
+    textLabel.Text = "Ты используешь старую версию скрипта. Проверь буфер обмена."
+    textLabel.TextColor3 = Color3.fromRGB(0, 0, 0) -- Цвет текста
+    textLabel.BackgroundTransparency = 1 -- Прозрачность фона текста
+    textLabel.TextWrapped = true -- Позволяет перенос текста на новую строку
+    textLabel.TextScaled = true -- Масштабирует текст для соответствия размеру
+
+    -- Функция для появления и исчезновения
+    local function showAndHide()
+        -- Появление
+        frame.Position = UDim2.new(0.5, -200, 1, 0) -- Начальная позиция (за экраном)
+        frame:TweenPosition(UDim2.new(0.5, -200, 0.5, -50), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 1, true)
+
+        wait(10) -- Ожидание 10 секунд
+
+        -- Исчезновение
+        frame:TweenPosition(UDim2.new(0.5, -200, 1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 1, true)
+        wait(1) -- Немного подождать, чтобы дать время на исчезновение
+        screenGui:Destroy() -- Удаляем GUI
+    end
+
+    -- Запуск функции showAndHide
+    showAndHide()
+end
+
+YesButton.MouseButton1Click:Connect(function()
+    setclipboard("🙂") -- текст для "Да"
+    showCheckClipboard()
+    showOldVersionMessage() -- Запускаем сообщение о старой версии
+end)
+
+NoButton.MouseButton1Click:Connect(function()
+    setclipboard("Похоже, система ошиблась, сообщите об этом создателю скрипта: @Roman304010 (тг)") -- текст для "Нет"
+    showCheckClipboard()
+    showOldVersionMessage() -- Запускаем сообщение о старой версии
+end)
+
+Frame:TweenPosition(UDim2.new(0.25, 0, 0.4, 0), "Out", "Quad", 0.5, true)
+ice("Players")
+local Player = Players.LocalPlayer
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local YesButton = Instance.new("TextButton")
+local NoButton = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+
+ScreenGui.Parent = Player:WaitForChild("PlayerGui")
+
+Frame.Size = UDim2.new(0.5, 0, 0.2, 0)
+Frame.Position = UDim2.new(0.25, 0, 0.4, 0) -- Позиция по центру экрана
+Frame.BackgroundColor3 = Color3.fromRGB(240, 240, 240) -- Светлый фон
+Frame.Parent = ScreenGui
+
+TextLabel.Size = UDim2.new(1, 0, 0.5, 0)
+TextLabel.Position = UDim2.new(0, 0, 0, 0)
+TextLabel.Text = "Система определила вашу страну как *название Страны*, это верно?"
+TextLabel.BackgroundTransparency = 1 -- Прозрачный фон
+TextLabel.Parent = Frame
+
+-- Настройка кнопки "Да"
+YesButton.Size = UDim2.new(0.4, 0, 0.4, 0)
+YesButton.Position = UDim2.new(0.1, 0, 0.6, 0)
+YesButton.Text = "Да"
+YesButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0) -- Зеленый цвет
+YesButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- Белый текст
+YesButton.Font = Enum.Font.SourceSansBold
+YesButton.TextSize = 18
+YesButton.Parent = Frame
+
+-- Настройка кнопки "Нет"
+NoButton.Size = UDim2.new(0.4, 0, 0.4, 0)
+NoButton.Position = UDim2.new(0.55, 0, 0.6, 0)
+NoButton.Text = "Нет"
+NoButton.BackgroundColor3 = Color3.fromRGB(150, 0, 0) -- Красный цвет
+NoButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- Белый текст
+NoButton.Font = Enum.Font.SourceSansBold
+NoButton.TextSize = 18
+NoButton.Parent = Frame
+
+local result, countryCode = pcall(function()
+    return LocalizationS:GetCountryRegionForPlayerAsync(Player)
+end)
+
+if result then
+    TextLabel.Text = "Система определила вашу страну как " .. countryCode .. ", это верно?"
+end
+
+local function hideGui()
+    Frame:TweenPosition(UDim2.new(0.25, 0, 1, 0), "In", "Quad", 0.5, true)
+end
+
+local function showCheckClipboard()
+    TextLabel.Text = "Проверь Клипборд"
+    YesButton.Visible = false
+    NoButton.Visible = false
+    wait(1)
+    hideGui()
+end
+
+local function showOldVersionMessage()
+    local screenGui = Instance.new("ScreenGui", Player.PlayerGui)
+    local frame = Instance.new("Frame", screenGui)
+
+    -- Настройки фрейма
+    frame.Size = UDim2.new(0, 400, 0, 100) -- Ширина и высота
+    frame.Position = UDim2.new(0.5, -200, 1, 0) -- Начальная позиция (за экраном)
+    frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Цвет фона
+
+    -- Создание текста
+setclipboard("Новая версия скрипта тут:https://t.me/+puS-T2u1HB8zYjJi")
+local textLabel = Instance.new("TextLabel", frame)
+    textLabel.Size = UDim2.new(1, 0, 1, 0) -- Занимает весь фрейм
+    textLabel.Text = "Ты используешь старую версию скрипта. Проверь буфер обмена."
+    textLabel.TextColor3 = Color3.fromRGB(0, 0, 0) -- Цвет текста
+    textLabel.BackgroundTransparency = 1 -- Прозрачность фона текста
+    textLabel.TextWrapped = true -- Позволяет перенос текста на новую строку
+    textLabel.TextScaled = true -- Масштабирует текст для соответствия размеру
+
+    -- Функция для появления и исчезновения
+    local function showAndHide()
+        -- Появление
+        frame.Position = UDim2.new(0.5, -200, 1, 0) -- Начальная позиция (за экраном)
+        frame:TweenPosition(UDim2.new(0.5, -200, 0.5, -50), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 1, true)
+
+        wait(10) -- Ожидание 10 секунд
+
+        -- Исчезновение
+        frame:TweenPosition(UDim2.new(0.5, -200, 1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 1, true)
+        wait(1) -- Немного подождать, чтобы дать время на исчезновение
+        screenGui:Destroy() -- Удаляем GUI
+    end
+
+    -- Запуск функции showAndHide
+    showAndHide()
+end
+
+YesButton.MouseButton1Click:Connect(function()
+    setclipboard("🙂") -- текст для "Да"
+    showCheckClipboard()
+    showOldVersionMessage() -- Запускаем сообщение о старой версии
+end)
+
+NoButton.MouseButton1Click:Connect(function()
+    setclipboard("Похоже, система ошиблась, сообщите об этом создателю скрипта: @Roman304010 (тг)") -- текст для "Нет"
+    showCheckClipboard()
+    showOldVersionMessage() -- Запускаем сообщение о старой версии
+end)
+
+Frame:TweenPosition(UDim2.new(0.25, 0, 0.4, 0), "Out", "Quad", 0.5, true)
+layer
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local YesButton = Instance.new("TextButton")
+local NoButton = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+
+ScreenGui.Parent = Player:WaitForChild("PlayerGui")
+
+Frame.Size = UDim2.new(0.5, 0, 0.2, 0)
+Frame.Position = UDim2.new(0.25, 0, 0.4, 0) -- Позиция по центру экрана
+Frame.BackgroundColor3 = Color3.fromRGB(240, 240, 240) -- Светлый фон
+Frame.Parent = ScreenGui
+
+TextLabel.Size = UDim2.new(1, 0, 0.5, 0)
+TextLabel.Position = UDim2.new(0, 0, 0, 0)
+TextLabel.Text = "Система определила вашу страну как *название Страны*, это верно?"
+TextLabel.BackgroundTransparency = 1 -- Прозрачный фон
+TextLabel.Parent = Frame
+
+-- Настройка кнопки "Да"
+YesButton.Size = UDim2.new(0.4, 0, 0.4, 0)
+YesButton.Position = UDim2.new(0.1, 0, 0.6, 0)
+YesButton.Text = "Да"
+YesButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0) -- Зеленый цвет
+YesButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- Белый текст
+YesButton.Font = Enum.Font.SourceSansBold
+YesButton.TextSize = 18
+YesButton.Parent = Frame
+
+-- Настройка кнопки "Нет"
+NoButton.Size = UDim2.new(0.4, 0, 0.4, 0)
+NoButton.Position = UDim2.new(0.55, 0, 0.6, 0)
+NoButton.Text = "Нет"
+NoButton.BackgroundColor3 = Color3.fromRGB(150, 0, 0) -- Красный цвет
+NoButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- Белый текст
+NoButton.Font = Enum.Font.SourceSansBold
+NoButton.TextSize = 18
+NoButton.Parent = Frame
+
+local result, countryCode = pcall(function()
+    return LocalizationS:GetCountryRegionForPlayerAsync(Player)
+end)
+
+if result then
+    TextLabel.Text = "Система определила вашу страну как " .. countryCode .. ", это верно?"
+end
+
+local function hideGui()
+    Frame:TweenPosition(UDim2.new(0.25, 0, 1, 0), "In", "Quad", 0.5, true)
+end
+
+local function showCheckClipboard()
+    TextLabel.Text = "Проверь Клипборд"
+    YesButton.Visible = false
+    NoButton.Visible = false
+    wait(1)
+    hideGui()
+end
+
+local function showOldVersionMessage()
+    local screenGui = Instance.new("ScreenGui", Player.PlayerGui)
+    local frame = Instance.new("Frame", screenGui)
+
+    -- Настройки фрейма
+    frame.Size = UDim2.new(0, 400, 0, 100) -- Ширина и высота
+    frame.Position = UDim2.new(0.5, -200, 1, 0) -- Начальная позиция (за экраном)
+    frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Цвет фона
+
+    -- Создание текста
+setclipboard("Новая версия скрипта тут:https://t.me/+puS-T2u1HB8zYjJi")
+local textLabel = Instance.new("TextLabel", frame)
+    textLabel.Size = UDim2.new(1, 0, 1, 0) -- Занимает весь фрейм
+    textLabel.Text = "Ты используешь старую версию скрипта. Проверь буфер обмена."
+    textLabel.TextColor3 = Color3.fromRGB(0, 0, 0) -- Цвет текста
+    textLabel.BackgroundTransparency = 1 -- Прозрачность фона текста
+    textLabel.TextWrapped = true -- Позволяет перенос текста на новую строку
+    textLabel.TextScaled = true -- Масштабирует текст для соответствия размеру
+
+    -- Функция для появления и исчезновения
+    local function showAndHide()
+        -- Появление
+        frame.Position = UDim2.new(0.5, -200, 1, 0) -- Начальная позиция (за экраном)
+        frame:TweenPosition(UDim2.new(0.5, -200, 0.5, -50), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 1, true)
+
+        wait(10) -- Ожидание 10 секунд
+
+        -- Исчезновение
+        frame:TweenPosition(UDim2.new(0.5, -200, 1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 1, true)
+        wait(1) -- Немного подождать, чтобы дать время на исчезновение
+        screenGui:Destroy() -- Удаляем GUI
+    end
+
+    -- Запуск функции showAndHide
+    showAndHide()
+end
+
+YesButton.MouseButton1Click:Connect(function()
+    setclipboard("🙂") -- текст для "Да"
+    showCheckClipboard()
+    showOldVersionMessage() -- Запускаем сообщение о старой версии
+end)
+
+NoButton.MouseButton1Click:Connect(function()
+    setclipboard("Похоже, система ошиблась, сообщите об этом создателю скрипта: @Roman304010 (тг)") -- текст для "Нет"
+    showCheckClipboard()
+    showOldVersionMessage() -- Запускаем сообщение о старой версии
+end)
+
+Frame:TweenPosition(UDim2.new(0.25, 0, 0.4, 0), "Out", "Quad", 0.5, true)
+ice("Players")
+local Player = Players.LocalPlayer
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local YesButton = Instance.new("TextButton")
+local NoButton = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+
+ScreenGui.Parent = Player:WaitForChild("PlayerGui")
+
+Frame.Size = UDim2.new(0.5, 0, 0.2, 0)
+Frame.Position = UDim2.new(0.25, 0, 0.4, 0) -- Позиция по центру экрана
+Frame.BackgroundColor3 = Color3.fromRGB(240, 240, 240) -- Светлый фон
+Frame.Parent = ScreenGui
+
+TextLabel.Size = UDim2.new(1, 0, 0.5, 0)
+TextLabel.Position = UDim2.new(0, 0, 0, 0)
+TextLabel.Text = "Система определила вашу страну как *название Страны*, это верно?"
+TextLabel.BackgroundTransparency = 1 -- Прозрачный фон
+TextLabel.Parent = Frame
+
+-- Настройка кнопки "Да"
+YesButton.Size = UDim2.new(0.4, 0, 0.4, 0)
+YesButton.Position = UDim2.new(0.1, 0, 0.6, 0)
+YesButton.Text = "Да"
+YesButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0) -- Зеленый цвет
+YesButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- Белый текст
+YesButton.Font = Enum.Font.SourceSansBold
+YesButton.TextSize = 18
+YesButton.Parent = Frame
+
+-- Настройка кнопки "Нет"
+NoButton.Size = UDim2.new(0.4, 0, 0.4, 0)
+NoButton.Position = UDim2.new(0.55, 0, 0.6, 0)
+NoButton.Text = "Нет"
+NoButton.BackgroundColor3 = Color3.fromRGB(150, 0, 0) -- Красный цвет
+NoButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- Белый текст
+NoButton.Font = Enum.Font.SourceSansBold
+NoButton.TextSize = 18
+NoButton.Parent = Frame
+
+local result, countryCode = pcall(function()
+    return LocalizationS:GetCountryRegionForPlayerAsync(Player)
+end)
+
+if result then
+    TextLabel.Text = "Система определила вашу страну как " .. countryCode .. ", это верно?"
+end
+
+local function hideGui()
+    Frame:TweenPosition(UDim2.new(0.25, 0, 1, 0), "In", "Quad", 0.5, true)
+end
+
+local function showCheckClipboard()
+    TextLabel.Text = "Проверь Клипборд"
+    YesButton.Visible = false
+    NoButton.Visible = false
+    wait(1)
+    hideGui()
+end
+
+local function showOldVersionMessage()
+    local screenGui = Instance.new("ScreenGui", Player.PlayerGui)
+    local frame = Instance.new("Frame", screenGui)
+
+    -- Настройки фрейма
+    frame.Size = UDim2.new(0, 400, 0, 100) -- Ширина и высота
+    frame.Position = UDim2.new(0.5, -200, 1, 0) -- Начальная позиция (за экраном)
+    frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Цвет фона
+
+    -- Создание текста
+setclipboard("Новая версия скрипта тут:https://t.me/+puS-T2u1HB8zYjJi")
+local textLabel = Instance.new("TextLabel", frame)
     textLabel.Size = UDim2.new(1, 0, 1, 0) -- Занимает весь фрейм
     textLabel.Text = "Ты используешь старую версию скрипта. Проверь буфер обмена."
     textLabel.TextColor3 = Color3.fromRGB(0, 0, 0) -- Цвет текста
